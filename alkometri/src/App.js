@@ -5,7 +5,7 @@ function App() {
   const [paino, setPaino] = useState(0)
   const [pullo, setPullo] = useState(0)
   const [tunti, setTunti] = useState(0)
-  const [sukupuoli, setSukupuoli] = useState('male');
+  const [sukupuoli, setSukupuoli] = useState('mies');
   const [verenalkoholinpitoisuus, setPitoisuus] = useState(0);
   
 
