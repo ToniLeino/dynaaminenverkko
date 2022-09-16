@@ -12,22 +12,32 @@ function App() {
   
  
 
-  function pulloLitroiks(){return pullo * 0.33}
-  function grammat(){return pulloLitroiks() * 8 * 4.5}
-  function palaminen(){return paino / 10}
-  function grammojaJäljellä(){return grammat() - (palaminen() * tunti)}
-  function miehellä(){return (grammojaJäljellä() / (paino * 0.7)).toFixed(2)}
-  function naisella(){return (grammojaJäljellä() / (paino * 0.6)).toFixed(2)}
-  
-  const laske = (e) => {
-    e.preventDefault()
-    let tulos = 0;
-    if (sukupuoli === 'mies') {
-      tulos = miehellä
-    } else {
-      tulos = naisella
+  function laske() {
+    let Litrat = pullo * 0.33
+    let Grammat = Litrat * 8 * 4.5
+    let Palonopeus = paino / 10
+    let GrammojaJäljellä = Grammat - (Palonopeus*tunti)
+
+    if (sukupuoli === "mies"){
+      let verenalkoholinpitoisuus = GrammojaJäljellä / (paino * 0.7)
+      if (verenalkoholinpitoisuus < 0){
+        setPitoisuus(0)
+      }
+      else{
+        setPitoisuus(verenalkoholinpitoisuus)
+      }
     }
-    setPitoisuus(tulos)
+    else if (sukupuoli === "nainen"){
+      let verenalkoholinpitoisuus = GrammojaJäljellä / (paino * 0.6)
+      if (verenalkoholinpitoisuus < 0){
+        setPitoisuus(0)
+      }
+      else{
+        setPitoisuus(verenalkoholinpitoisuus)
+      }
+    }
+    
+    
   }
   
   
@@ -47,22 +57,22 @@ function App() {
       <div>
         <label>Pullot</label>
         <select value = {pullo} onChange={e => setPullo(e.target.value)}>
-          <option value="0">1</option>
-          <option value="1">2</option>
-          <option value="2">3</option>
-          <option value="3">4</option>
-          <option value="4">5</option>
-          <option value="5">6</option>
-          <option value="6">7</option>
-          <option value="7">8</option>
-          <option value="8">9</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
       </div>
       <div>
         <label>Aika</label>
-        <select value = {tunti} onChange={e =>setTunti(e.target.value)}>
+        <select type="number" value = {tunti} onChange={e =>setTunti(e.target.value)}>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -87,7 +97,7 @@ function App() {
         <label>Verenalkoholipitoisuus</label>
         <output> {verenalkoholinpitoisuus.toFixed(2)}</output>
       </div>
-      <button>Laske</button>
+      <button type="button" onClick={laske}>Laske</button>
       </form>
     </div>
     
